@@ -1,5 +1,6 @@
 const Koa = require('koa')
 const Router = require('koa-router')
+const requireDirectory = require('require-directory')
 
 const book = require('./api/v1/book')
 const classic = require('./api/v1/classic')
@@ -12,10 +13,20 @@ const router = new Router()
 //     ctx.body = {key:"classic"}
 //     // ctx.body = {aa:'hah'}
 // })
+requireDirectory(module,'./api',{
+    visit:whentlll
+})
+
+function whentlll(obj){
+    // console.log(obj);
+    if(obj instanceof Router){
+        app.use(obj.routes())
+    }
+}
 
 // app.use(router.routes())
-app.use(book.routes())
-app.use(classic.routes())
+// app.use(book.routes())
+// app.use(classic.routes())
 
 
 // app.use(async(ctx,next)=>{
@@ -28,9 +39,9 @@ app.use(classic.routes())
 // })
 
 
-module.exports = {
-    router
+// module.exports = {
+//     router
 
-}
+// }
 
 app.listen(3000)
