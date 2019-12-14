@@ -1,7 +1,7 @@
 const Koa = require('koa')
 // const Router = require('koa-router')
 // const requireDirectory = require('require-directory')
-
+const parser = require('koa-bodyparser')
 const InitManager = require('./core/init')
 
 // const book = require('./app/api/v1/book')
@@ -25,7 +25,7 @@ const app = new Koa()
 //         app.use(obj.routes())
 //     }
 // }
-
+app.use(parser())
 InitManager.initCore(app)
 
 // app.use(router.routes())
